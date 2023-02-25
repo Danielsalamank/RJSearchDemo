@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Búsqueda de Archivos</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <style>
+            input[type="text"] {
+                background-color: #343a40;
+                border-radius: 20px;
+                padding: 10px;
+                color: #fff;
+            }
+            input[type="submit"] {
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                background-color: #007bff;
+                border: none;
+            }
+            .card {
+                margin-bottom: 20px;
+                border-radius: 20px;
+                overflow: hidden;
+            }
+            .card-text {
+                font-size: 18px;
+                line-height: 1.5;
+            }
+            .card:hover {
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .jumbotron {
+                padding: 2rem;
+                margin-bottom: 2rem;
+                background-color: #fff;
+                border-radius: 20px;
+            }
+        </style>
+    </head>
+<body class="container">
+    <h1>Búsqueda de Archivos</h1>
+    <form method="POST" class="form-group">
+        <input type="text" name="query">
+        <input type="submit" value="Buscar" class="btn btn-primary">
+    </form>
+    {% for title, summary, file, article_num in results %}
+        <div class="card">
+            <div class="card-header">
+                <h3>{{ title }} - Artículo {{ article_num }} - {{ file }}</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ summary }}</p>
+                <p>
+                    <a href="{{ url_for('static', filename='public/' + file) }}" class="btn btn-primary">Enlace al archivo</a>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
